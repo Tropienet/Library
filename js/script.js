@@ -1,6 +1,7 @@
 const display = document.querySelector(".displayButton");
 const container = document.querySelector(".container");
 const newBookButton = document.querySelector(".newBookButton");
+const buttonForRemovingBookCards = document.create
 
 let myLibrary = [];
 
@@ -13,14 +14,14 @@ function Book(title, author, pages, read){
 
 //addBookToLibrary.prototype = Object.create(Book.prototype);
 
-function displayBooks(){
+/*function displayBooks(){
     for(let i = 0;i<myLibrary.length;i++){
         console.log(myLibrary[i]);
     }
-}
+} */
 
 display.addEventListener('click', () =>{
-    removeDisplayFromPage();
+    //removeDisplayFromPage();
     displayBooksOnPage();
 })
 
@@ -29,6 +30,7 @@ function displayBooksOnPage(){
     for(let i = 0;i<myLibrary.length;i++){
         console.log("Button works");
         const bookCard = document.createElement('div');
+        bookCard.setAttribute('class', `index${myLibrary[i]}`);
         const bookTitle = document.createElement('p');
         const bookAuthor = document.createElement('p');
         const bookPageCount = document.createElement('p');
@@ -43,7 +45,19 @@ function displayBooksOnPage(){
         bookCard.appendChild(bookPageCount);
         bookCard.appendChild(bookReadStatus);
         container.appendChild(bookCard);
+        createButtonForRemovingBookCard(bookCard, i);
     }
+}
+
+function createButtonForRemovingBookCard(bookCard, index){
+    const buttonForRemovingBookCards = document.createElement('button');
+    buttonForRemovingBookCards.textContent = "Remove book from library";
+
+    buttonForRemovingBookCards.addEventListener('click', () =>{
+        bookCard.remove();
+        myLibrary.splice(index, 1);
+    })
+    bookCard.appendChild(buttonForRemovingBookCards);
 }
 
 newBookButton.addEventListener('click', () =>{
@@ -156,7 +170,7 @@ function addBookToLibrary(){
      newBookButton.remove();
  }
 
- function removeDisplayFromPage(){
+ /*function removeDisplayFromPage(){
      const buttonForRemovingDisplay = document.createElement('button');
      container.appendChild(buttonForRemovingDisplay);
     buttonForRemovingDisplay.textContent= "Remove display from page";
@@ -166,4 +180,4 @@ function addBookToLibrary(){
         buttonForRemovingDisplay.remove();
      })
 
- }
+ }*/
